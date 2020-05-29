@@ -81,18 +81,19 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public String getSinlgeEntry(String useremail) {
-        SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cursor=db.query(SIGNUP_TABLE_NAME,null," signup_email=?",new String[]{useremail},null,null,null);
-
+        SQLiteDatabase db=this.getWritableDatabase();
+        //Cursor cursor=db.query(SIGNUP_TABLE_NAME,null,"signup_email=?",new String[]{ useremail },null,null,null);
+        Cursor cursor=db.rawQuery("select signup_email from signup_table where signup_email = " + useremail,null);
+        //Cursor cursor=db.query(SIGNUP_TABLE_NAME,null,"signup_email=?",new String[]{ useremail },null,null,null);
         if(cursor.getCount()<1) // UserName Not Exist
         {
             cursor.close();
             return "NOT EXIST";
         }
-            cursor.moveToFirst();
-            String ResultPassword = cursor.getString(cursor.getColumnIndex("signup_password"));
-            cursor.close();
-            return ResultPassword;
+        cursor.moveToFirst();
+        String ResultPassword = cursor.getString(cursor.getColumnIndex("signup_password"));
+        cursor.close();
+        return ResultPassword;
 
     }
 }

@@ -27,16 +27,17 @@ public class Login_Form extends AppCompatActivity {
     }
 
     private void LoginInsertData() {
+        final String emailid=txtemail.getText().toString();
+        final String password=txtpwd.getText().toString();
         btnlogin.setOnClickListener(new View.OnClickListener() {
-            String emailid=txtemail.getText().toString();
-            String password=txtpwd.getText().toString();
+
             @Override
             public void onClick(View v) {
                 String storedPassword=mydb.getSinlgeEntry(emailid);
                 if (password.equals(storedPassword)) {
                     Toast.makeText(Login_Form.this, "Congrats: Login Successfull!!!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), Main2Activity.class));
                     mydb.LoginInsertData(emailid,password);
+                    startActivity(new Intent(getApplicationContext(), Main2Activity.class));
                 }
                 else {
                     Toast.makeText(Login_Form.this, "Email or Password does not match", Toast.LENGTH_SHORT).show();
