@@ -22,12 +22,12 @@
         android:focusableInTouchMode="true">
 
         <EditText
-            android:id="@+id/email_text"
+            android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
+            android:hint="User Name"
+            android:inputType="text"
             android:textSize="22sp" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout

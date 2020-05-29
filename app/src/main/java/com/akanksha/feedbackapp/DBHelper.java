@@ -22,7 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String SIGNUP_PASSWORD = "signup_password";
     public static final String SIGNUP_CONFIRM_PASSWORD = "signup_confirm_password";
 
-    static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 1;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
@@ -82,19 +82,22 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public String getSingleEntry(String userEmail) {
         SQLiteDatabase db=this.getReadableDatabase();
+
         Cursor cursor=db.rawQuery("select signup_username, signup_password from signup_table " +
-                "where signup_email = ?",new String[]{userEmail});
-        if(cursor != null && cursor.getCount() > 1) {
+                "where signup_username = ?",new String[]{userEmail});
+
+        if(cursor != null) {
             cursor.moveToFirst();
-            String ResultPassword = cursor.getString(cursor.getColumnIndex("signup_password"));
-            cursor.close();
-            return ResultPassword;
-        } else {
-            if (cursor != null) {
+            if(cursor.getCount() > 0) {
+                String ResultPassword = cursor.getString(cursor.getColumnIndex("signup_password"));
                 cursor.close();
+                return ResultPassword;
             }
-            return "NOT EXIST";
         }
+        if (cursor != null) {
+            cursor.close();
+        }
+        return "NOT EXIST";
 
     }
 }

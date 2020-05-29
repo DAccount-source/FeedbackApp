@@ -11,13 +11,13 @@ import android.widget.Toast;
 public class Login_Form extends AppCompatActivity {
 
     DBHelper mydb;
-    EditText txtemail,txtpwd;
+    EditText txtUserName,txtpwd;
     Button btnlogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login__form);
-        txtemail= findViewById(R.id.email_text);
+        txtUserName = findViewById(R.id.user_name);
         txtpwd= findViewById(R.id.LPwdTxt);
         mydb=new DBHelper(this);
         btnlogin= findViewById(R.id.LoginBtn);
@@ -26,12 +26,12 @@ public class Login_Form extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String emailId= txtemail.getText().toString();
+                String userName= txtUserName.getText().toString();
                 String password= txtpwd.getText().toString();
-                String storedPassword=mydb.getSingleEntry(emailId);
+                String storedPassword=mydb.getSingleEntry(userName);
                 if (password.equals(storedPassword)) {
                     Toast.makeText(Login_Form.this, "Congrats: Login Successfull!!!", Toast.LENGTH_SHORT).show();
-                    mydb.LoginInsertData(emailId,password);
+                    mydb.LoginInsertData(userName,password);
                     startActivity(new Intent(getApplicationContext(), Main2Activity.class));
                 }
                 else {
