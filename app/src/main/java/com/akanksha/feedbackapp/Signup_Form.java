@@ -40,8 +40,10 @@ public class Signup_Form extends AppCompatActivity {
                 boolean isInserted=mydb.SignupInsertData(txtfullname.getText().toString(),txtusername.getText().toString(),
                         txtphoneno.getText().toString(),
                         txtemail.getText().toString(),txtpwd.getText().toString(),txtconfirmpwd.getText().toString());
-                if (isInserted=true)
+                if (isInserted=true) {
                     Toast.makeText(Signup_Form.this, "Data Inserted", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
                 else
                     Toast.makeText(Signup_Form.this, "Data not Inserted", Toast.LENGTH_SHORT).show();
 

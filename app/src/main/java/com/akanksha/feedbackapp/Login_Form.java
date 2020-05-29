@@ -17,26 +17,21 @@ public class Login_Form extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login__form);
-        getSupportActionBar().setTitle("Login Form");
+        txtemail= findViewById(R.id.email_text);
+        txtpwd= findViewById(R.id.LPwdTxt);
         mydb=new DBHelper(this);
-        txtemail=(EditText)findViewById(R.id.LEmailTxt);
-        txtpwd=(EditText) findViewById(R.id.LPwdTxt);
-
-        btnlogin=(Button)findViewById(R.id.LoginBtn);
-        LoginInsertData();
-    }
-
-    private void LoginInsertData() {
-        final String emailid=txtemail.getText().toString();
-        final String password=txtpwd.getText().toString();
+        btnlogin= findViewById(R.id.LoginBtn);
+        getSupportActionBar().setTitle("Login Form");
         btnlogin.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                String storedPassword=mydb.getSinlgeEntry(emailid);
+                String emailId= txtemail.getText().toString();
+                String password= txtpwd.getText().toString();
+                String storedPassword=mydb.getSingleEntry(emailId);
                 if (password.equals(storedPassword)) {
                     Toast.makeText(Login_Form.this, "Congrats: Login Successfull!!!", Toast.LENGTH_SHORT).show();
-                    mydb.LoginInsertData(emailid,password);
+                    mydb.LoginInsertData(emailId,password);
                     startActivity(new Intent(getApplicationContext(), Main2Activity.class));
                 }
                 else {
@@ -45,6 +40,7 @@ public class Login_Form extends AppCompatActivity {
             }
         });
     }
+
 
     public void btn_signupForm(View view) {
         startActivity(new Intent(getApplicationContext(),Signup_Form.class));

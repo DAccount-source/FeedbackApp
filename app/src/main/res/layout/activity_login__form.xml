@@ -8,13 +8,13 @@
     android:orientation="vertical"
     android:background="@color/background"
     android:padding="30dp">
-    
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:src="@drawable/login"
         android:padding="30dp"/>
-    
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,12 +22,12 @@
         android:focusableInTouchMode="true">
 
         <EditText
-            android:id="@+id/LEmailTxt"
+            android:id="@+id/email_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ems="10"
             android:hint="Email"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:textSize="22sp" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
